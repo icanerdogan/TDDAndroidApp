@@ -2,7 +2,7 @@ package com.ibrahimcanerdogan.tddandroidapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import com.ibrahimcanerdogan.tddandroidapp.post.PostFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,8 +1,7 @@
-package com.ibrahimcanerdogan.tddandroidapp
+package com.ibrahimcanerdogan.tddandroidapp.post
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,15 +9,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.ibrahimcanerdogan.tddandroidapp.R
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * A fragment representing a list of Items.
  */
 class PostFragment : Fragment() {
 
-    lateinit var viewModel: PostViewModel
-    lateinit var viewModelFactory: PostViewModelFactory
+    private lateinit var viewModel: PostViewModel
+    private lateinit var viewModelFactory: PostViewModelFactory
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("http://127.0.0.1:3000/")
+        .client(OkHttpClient())
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val api = retrofit.create(PostAPI::class.java)
+
+    private val service = PostService(api)
+    private val repository: PostRepository = PostRepository(service)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +58,7 @@ class PostFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModelFactory = PostViewModelFactory()
+        viewModelFactory = PostViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[PostViewModel::class.java]
     }
 

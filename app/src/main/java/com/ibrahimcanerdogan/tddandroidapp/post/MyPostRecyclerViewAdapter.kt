@@ -1,11 +1,11 @@
-package com.ibrahimcanerdogan.tddandroidapp
+package com.ibrahimcanerdogan.tddandroidapp.post
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.ibrahimcanerdogan.tddandroidapp.R
 import com.ibrahimcanerdogan.tddandroidapp.databinding.PostsItemBinding
 
 
@@ -24,7 +24,7 @@ class MyPostRecyclerViewAdapter(
 
         holder.postTitle.text = item.title
         holder.postBody.text = item.body
-        holder.postImage.setImageResource(item.image)
+        holder.postImage.setImageResource(R.mipmap.ic_launcher)
     }
 
     override fun getItemCount(): Int = values.size
