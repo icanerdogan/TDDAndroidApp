@@ -4,8 +4,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import java.lang.RuntimeException
+import javax.inject.Inject
 
-class PostService(
+class PostService @Inject constructor(
     private val postAPI: PostAPI
 ){
 

@@ -10,28 +10,21 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.ibrahimcanerdogan.tddandroidapp.R
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 /**
  * A fragment representing a list of Items.
  */
+@AndroidEntryPoint
 class PostFragment : Fragment() {
 
     private lateinit var viewModel: PostViewModel
+    @Inject
     private lateinit var viewModelFactory: PostViewModelFactory
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://127.0.0.1:3000/")
-        .client(OkHttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val api = retrofit.create(PostAPI::class.java)
-
-    private val service = PostService(api)
-    private val repository: PostRepository = PostRepository(service)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +51,6 @@ class PostFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModelFactory = PostViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[PostViewModel::class.java]
     }
 

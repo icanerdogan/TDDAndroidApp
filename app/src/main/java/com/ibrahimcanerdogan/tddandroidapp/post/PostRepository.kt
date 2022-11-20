@@ -2,9 +2,10 @@ package com.ibrahimcanerdogan.tddandroidapp.post
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 
-class PostRepository(
+class PostRepository @Inject constructor(
     private val service: PostService
 ) {
 
